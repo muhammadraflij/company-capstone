@@ -9,10 +9,6 @@ app = Flask(__name__)
 # load model
 model = load_model("Model/lstm_6_3_e50/my_model.h5")
 
-kota = request.args.get('city', default = "Jakarta", type = str)
-weatherbit_key = request.args.get('key', default = "9308fac32c9d45a8a4ba9dc418df799f", type = str)
-# collect data
-a = data_by_city(kota, weatherbit_key)
 
 @app.route("/")
 def index():
@@ -21,8 +17,11 @@ def index():
 # /by_city?city=Jakarta&key=
 @app.route("/by_city")
 def by_city():
+  kota = request.args.get('city', default = "Jakarta", type = str)
+  weatherbit_key = request.args.get('key', default = "9308fac32c9d45a8a4ba9dc418df799f", type = str)
+  # collect data
+  a = data_by_city(kota, weatherbit_key)
   
-
   # scaling and reshape
   scaler = MinMaxScaler()
   data = scaler.fit_transform(a)
@@ -33,9 +32,15 @@ def by_city():
   predictions = predictions.reshape(3,7)
   predictions = scaler.inverse_transform(predictions)
   predictions = predictions.tolist()
-  
-  return jsonify(predictions)
-  #return f"forecast for the next 3 hours in {kota} \n\n\n {predictions}"
+  predictions = list_to_dict(predictions)
+
+  # history last 3 hour
+  history = a[:3]
+  history = history.values.tolist()
+  history = list_to_dict(history)
+
+  #return jsonify(data: predictions)
+  return f"forecast for the next 3 hours in {predictions} \n\n\nhistory last 3 hour {history}"
 
 # /by_location?lat=35&lon=-78&key=
 @app.route("/by_location")
@@ -60,12 +65,6 @@ def by_location():
   return jsonify(predictions)
   #return f"forecast for the next 3 hours in {lat}, {lon} \n\n\n {predictions}"
 
-@app.route("/history")
-def by_history():
-  hist = a[3:]
-  hist = hist.values.tolist()
-  
-  return jsonify(hist)
 
 if __name__ == "__main__":
     app.run(debug=True)
