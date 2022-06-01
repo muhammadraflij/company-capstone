@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from flask_ngrok import run_with_ngrok
+#from flask_ngrok import run_with_ngrok
 from keras.models import load_model
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from colect import data_by_city, data_by_location
