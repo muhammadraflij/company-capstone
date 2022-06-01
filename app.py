@@ -8,6 +8,7 @@ from list_to_dict import list_to_dict
 #!ngrok authtoken "29mT8kj4OLsAwQwkFiaePr4CQ10_6QbJzAjNwjjSr9cTdWP8h"
 
 app = Flask(__name__)
+server = app.server
 #run_with_ngrok(app)   
 
 # load model
@@ -61,6 +62,7 @@ def by_location():
 
   return jsonify(predictions)
   #return f"forecast for the next 3 hours in {lat}, {lon} \n\n\n {predictions}"
+
 
 
 if __name__ == "__main__":
