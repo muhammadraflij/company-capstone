@@ -7,7 +7,7 @@ from list_to_dict import list_to_dict
 app = Flask(__name__) 
 
 # load model
-model = load_model("Model/lstm_6_3_e50/my_model.h5")
+model = load_model("../Model/lstm_6_3_e50/my_model.h5")
 
 
 @app.route("/")
