@@ -1,14 +1,12 @@
 from flask import Flask, request, jsonify
-from flask_ngrok import run_with_ngrok
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from colect import data_by_city, data_by_location
 from list_to_dict import list_to_dict
 
-#!ngrok authtoken "29mT8kj4OLsAwQwkFiaePr4CQ10_6QbJzAjNwjjSr9cTdWP8h"
 
 app = Flask(__name__)
-#run_with_ngrok(app)   
+   
 
 # load model
 model = load_model("Model/lstm_6_3_e50/my_model.h5")
