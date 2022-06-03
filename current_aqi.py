@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 from numpy import array
 
-def current_aqi_prov():
+def current_aqi_prov(key):
   kota = {
       "-6.11528": "106.15417", "-6.92222": "107.60694", "-6.99306": "110.42083",
       "-7.24917": "112.7508", "-7.80139": "110.3647", "-8.65": "115.21667",
@@ -18,10 +18,10 @@ def current_aqi_prov():
   data = []
 
   for x,y in kota.items():
-    key = "9308fac32c9d45a8a4ba9dc418df799f"
+    api_key = key#"8ad9eca88a2e4330a022ad816a7d9886"
     lat = x
 
-    current = f"https://api.weatherbit.io/v2.0/current/airquality?lat={x}&lon={y}&key={key}"
+    current = f"https://api.weatherbit.io/v2.0/current/airquality?lat={x}&lon={y}&key={api_key}"
     r = requests.get(current)
     
     df = pd.read_json(r.text)
