@@ -32,12 +32,12 @@ def by_city():
   predictions = predictions.reshape(3,7)
   predictions = scaler.inverse_transform(predictions)
   predictions = predictions.tolist()
-  #predictions = list_to_dict(predictions)
+  predictions = list_to_dict(predictions)
   
   # history last 3 hour
   history = a[:3]
   history = history.values.tolist()
-  #history = list_to_dict(history)
+  history = list_to_dict(history)
 
   # merge prediction and history
   data = ({
@@ -71,12 +71,12 @@ def by_location():
   predictions = predictions.reshape(3,7)
   predictions = scaler.inverse_transform(predictions)
   predictions = predictions.tolist()
-  #predictions = list_to_dict(predictions)
+  predictions = list_to_dict(predictions)
   
   # history last 3 hour
   history = a[:3]
   history = history.values.tolist()
-  #history = list_to_dict(history)
+  history = list_to_dict(history)
 
   #return jsonify(predictions)
   #return f"forecast for the next 3 hours in lat {lat}is \n\n\n {predictions} \n\n\n history last 3 hours is {history}"
@@ -96,7 +96,7 @@ def current():
   weatherbit_key = request.args.get('key', default = "8ad9eca88a2e4330a022ad816a7d9886", type = str)
 
   data = current_aqi_prov(weatherbit_key)
-  #data = list_to_dict_prov(data)
+  data = list_to_dict_prov(data)
   
   data = ({
       "data": ({
