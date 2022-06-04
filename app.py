@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from tensorflow.keras.models import load_model
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from colect import data_by_city, data_by_location
-from list_to_dict import list_to_dict
+from list_to_dict import list_to_dict, list_to_dict_prov
 from current_aqi import current_aqi_prov
 
 app = Flask(__name__)

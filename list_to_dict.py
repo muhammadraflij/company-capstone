@@ -28,12 +28,14 @@ def list_to_dict_prov(lst):
     item_x = x[i]
     for item in item_x:
       z = {"city": item_x[0],
-          "aqi": item_x[1],
-          "pm10": item_x[2],
-          "pm25": item_x[3],
-          "o3": item_x[4],
-          "so2": item_x[5],
-          "no2": item_x[6],
-          "co": item_x[7]}
+           "lat": item_x[1],
+           "lon": item_x[2],
+           "aqi": item_x[3],
+           "pm10": item_x[4],
+           "pm25": item_x[5],
+           "o3": item_x[6],
+           "so2": item_x[7],
+           "no2": item_x[8],
+           "co": item_x[9]}
       data[i] = z
   return data
