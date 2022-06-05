@@ -1,10 +1,11 @@
 import numpy as np
 
+
 # format List in list to dict with key
 def list_to_dict(lst):
   # format list value to int
   x = lst
-  data = {}
+  data = []
 
   for i in range(len(x)):
     item_x = x[i]
@@ -16,13 +17,16 @@ def list_to_dict(lst):
           "so2": item_x[4],
           "no2": item_x[5],
           "co": item_x[6]}
-      data[i] = z
+    
+      if z not in data:
+        data.append(z)
+        
   return data
 
 # format list to dict for aqi 34 province
 def list_to_dict_prov(lst):
   x = lst
-  data = {}
+  data = []
 
   for i in range(len(x)):
     item_x = x[i]
@@ -37,5 +41,8 @@ def list_to_dict_prov(lst):
            "so2": item_x[7],
            "no2": item_x[8],
            "co": item_x[9]}
-      data[i] = z
+    
+      if z not in data:
+        data.append(z)
+     
   return data

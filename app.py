@@ -48,8 +48,6 @@ def by_city():
   })
 
   return data
-  #return f'{predictions}'
-  #return f"forecast for the next 3 hours in {kota} is \n\n\n {predictions} \n\n\n history last 3 hours is {history}"
 
 # /by_location?lat=35&lon=-78&key=8ad9eca88a2e4330a022ad816a7d9886
 @app.route("/by_location")
@@ -77,9 +75,6 @@ def by_location():
   history = a[:3]
   history = history.values.tolist()
   history = list_to_dict(history)
-
-  #return jsonify(predictions)
-  #return f"forecast for the next 3 hours in lat {lat}is \n\n\n {predictions} \n\n\n history last 3 hours is {history}"
   
   # merge prediction and history
   data = ({
@@ -90,6 +85,7 @@ def by_location():
   })
 
   return data
+
 # /current?key=8ad9eca88a2e4330a022ad816a7d9886
 @app.route("/current")
 def current():
@@ -105,7 +101,6 @@ def current():
   })
   
   return data
-  #return f'{data}'
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="127.0.0.1", port=5000)
