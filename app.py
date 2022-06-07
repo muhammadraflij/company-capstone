@@ -45,8 +45,65 @@ def by_city():
   df_merge.index = pd.date_range(df_merge.index[0], periods=len(df_merge), freq='1h')
   df_merge = df_merge.sort_index(ascending=False)
 
-  # reset index and format dataframe to list
+  # reset index and format datetime to obj
   df_merge = df_merge.reset_index()
+  df_merge['index'] = df_merge['index'].dt.strftime('%Y-%m-%d %H:%M:%S')
+
+  # data prediction for return
+  result_pred = df_merge[:3]
+  result_pred = result_pred.values.tolist()
+  result_pred = list_to_dict(result_pred)
+
+  # data history for return
+  result_hist = df_merge[3:]
+  result_hist = result_hist.values.tolist()
+  result_hist = list_to_dict(result_hist)
+
+  # merge result_pred and result_hist to dict data
+  data = ({
+      "data": ({
+          "forecast": result_pred,
+          "history": result_hist
+      })
+  })
+
+   
+  return data
+
+# /by_location?lat=35&lon=-78&key=8ad9eca88a2e4330a022ad816a7d9886
+@app.route("/by_location")
+def by_location():
+  lat = request.args.get('lat', default = 35, type = float)
+  lon = request.args.get('lon', default = -78, type = float)
+  weatherbit_key = request.args.get('key', default = "8ad9eca88a2e4330a022ad816a7d9886", type = str)
+
+  # collect data
+  a = data_by_location(lat, lon, weatherbit_key)
+
+  # scaling and reshape
+  scaler = MinMaxScaler()
+  data = scaler.fit_transform(a)
+  data = data.reshape(1,6,7)
+
+  # predictions and dataframing
+  predictions = model.predict(data)
+  predictions = predictions.reshape(3,7)
+  predictions = scaler.inverse_transform(predictions)
+  predictions = predictions.tolist()
+  predictions = pd.DataFrame(predictions)
+  predictions = predictions.rename(columns={0: "aqi", 1: "pm10", 2: "pm25", 
+                                          3: "o3", 4: "so2", 
+                                          5: "no2", 6: "co"})
+
+  # merge data a and predictions
+  frame = [a, predictions]
+  df_merge = pd.concat(frame)
+  df_merge.index = pd.date_range(df_merge.index[0], periods=len(df_merge), freq='1h')
+  df_merge = df_merge.sort_index(ascending=False)
+
+  # reset index and format datetime to obj
+  df_merge = df_merge.reset_index()
+  df_merge['index'] = df_merge['index'].dt.strftime('%Y-%m-%d %H:%M:%S')
 
   # data prediction for return
   result_pred = df_merge[:3]
@@ -66,44 +123,6 @@ def by_city():
       })
   })
     
-
-  return data
-
-# /by_location?lat=35&lon=-78&key=8ad9eca88a2e4330a022ad816a7d9886
-@app.route("/by_location")
-def by_location():
-  lat = request.args.get('lat', default = 35, type = float)
-  lon = request.args.get('lon', default = -78, type = float)
-  weatherbit_key = request.args.get('key', default = "8ad9eca88a2e4330a022ad816a7d9886", type = str)
-
-  # collect data
-  a = data_by_location(lat, lon, weatherbit_key)
-
-  # scaling and reshape
-  scaler = MinMaxScaler()
-  data = scaler.fit_transform(a)
-  data = data.reshape(1,6,7)
-
-  # predictions
-  predictions = model.predict(data)
-  predictions = predictions.reshape(3,7)
-  predictions = scaler.inverse_transform(predictions)
-  predictions = predictions.tolist()
-  predictions = list_to_dict(predictions)
-  
-  # history last 3 hour
-  history = a[:3]
-  history = history.values.tolist()
-  history = list_to_dict(history)
-  
-  # merge prediction and history
-  data = ({
-      "data": ({
-          "forecast": predictions,
-          "history": history
-      })
-  })
-
   return data
 
 # /current?key=8ad9eca88a2e4330a022ad816a7d9886

@@ -32,7 +32,13 @@ def data_by_city(city,key):
     # Dict to Dataframe
     df = pd.DataFrame.from_dict(data_json)
     
-    # set Datetime to index
+    # format datetime and set to index
+    new = df["datetime"].str.split("T", n = 1, expand = True)
+    df["date"]= new[0]
+    df["time"]= new[1]
+    df['datetime'] = df.date.map(str) + " " + df.time
+    df = df.drop(['date', 'time'], axis=1)
+    df.datetime = pd.to_datetime(df.datetime)
     df = df.set_index('datetime')
     
     # get last datetime
