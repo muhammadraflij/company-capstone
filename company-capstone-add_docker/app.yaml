@@ -1,0 +1,14 @@
+runtime: custom
+env: flex
+
+automatic_scaling:
+  target_cpu_utilization: 0.9
+  max_instances: 4
+
+resources:
+  cpu: 2
+  memory_gb: 2
+  disk_size_gb: 10
+
+
+  
