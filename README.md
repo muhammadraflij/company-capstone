@@ -1,2 +1,3 @@
 # company-capstone
-air quality forecast
+AW Monitor
+air quality & weather forecast
