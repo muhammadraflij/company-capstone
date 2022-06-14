@@ -51,13 +51,15 @@ def by_city():
 
   # data prediction for return
   result_pred = df_merge[:3]
+  result_pred = result_pred.sort_index(ascending=False)
   result_pred = result_pred.values.tolist()
   result_pred = list_to_dict(result_pred)
 
   # data history for return
-  result_hist = df_merge[3:]
+  result_hist = df_merge[4:7]
   result_hist = result_hist.values.tolist()
   result_hist = list_to_dict(result_hist)
+  a = a.sort_index()
 
   # merge result_pred and result_hist to dict data
   data = ({
@@ -79,6 +81,7 @@ def by_location():
 
   # collect data
   a = data_by_location(lat, lon, weatherbit_key)
+  a = a.sort_index()
 
   # scaling and reshape
   scaler = MinMaxScaler()
@@ -107,13 +110,15 @@ def by_location():
 
   # data prediction for return
   result_pred = df_merge[:3]
+  result_pred = result_pred.sort_index(ascending=False)
   result_pred = result_pred.values.tolist()
   result_pred = list_to_dict(result_pred)
 
   # data history for return
-  result_hist = df_merge[3:]
+  result_hist = df_merge[4:7]
   result_hist = result_hist.values.tolist()
   result_hist = list_to_dict(result_hist)
+  a = a.sort_index()
 
   # merge result_pred and result_hist to dict data
   data = ({
@@ -122,7 +127,8 @@ def by_location():
           "history": result_hist
       })
   })
-    
+
+   
   return data
 
 # /current?key=8ad9eca88a2e4330a022ad816a7d9886
