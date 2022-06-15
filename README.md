@@ -33,6 +33,6 @@
   
 ## 4. Other Repository
 <ul>
-  <li> Cloud Computing --> https://github.com/catherineelfrida/AWMonitor/tree/main/Cloud%20Computing </li>
+  <li> Cloud Computing --> https://github.com/prakosodwika/company-capstone </li>
   <li> Mobile Development --> https://github.com/yashlan/AWMonitor </li>
 <ul>
