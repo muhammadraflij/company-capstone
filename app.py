@@ -3,6 +3,7 @@ from tensorflow.keras.models import load_model
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from colect import data_by_city, data_by_location, current_aqi_prov
 from list_to_dict import list_to_dict, list_to_dict_prov
+from convert import convert_ISPU
 import pandas as pd
 
 app = Flask(__name__)
@@ -38,7 +39,9 @@ def by_city():
   predictions = predictions.rename(columns={0: "aqi", 1: "pm10", 2: "pm25", 
                                           3: "o3", 4: "so2", 
                                           5: "no2", 6: "co"})
-
+  # convert to ISPU
+  predictions = convert_ISPU(predictions)
+  
   # merge data a and predictions
   frame = [a, predictions]
   df_merge = pd.concat(frame)
@@ -97,6 +100,9 @@ def by_location():
   predictions = predictions.rename(columns={0: "aqi", 1: "pm10", 2: "pm25", 
                                           3: "o3", 4: "so2", 
                                           5: "no2", 6: "co"})
+
+  # convert to ISPU
+  predictions = convert_ISPU(predictions)
 
   # merge data a and predictions
   frame = [a, predictions]
