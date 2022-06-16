@@ -18,10 +18,10 @@ def convert_ISPU(predictions):
       if q1 > 420:
         k, t , r = (q1 - 420),(500 - 420), (400 - 300)
         ISPU = (r*k/t) + 300
-      elif 350 < q1 < 420 and q1 == 420:
+      elif 350 < q1 < 420 or q1 == 420:
         k, t , r = (q1 - 350),(420 - 350), (300 - 200)
         ISPU = (r*k/t) + 200
-      elif 150 < q1 < 350 and q1 == 350:
+      elif 150 < q1 < 350 or q1 == 350:
         k, t , r = (q1 - 150),(350 - 150), (200 - 100)
         ISPU = (r*k/t) + 100
       else :
@@ -31,10 +31,10 @@ def convert_ISPU(predictions):
       if q2 > 250.4:
         k, t , r = (q2 - 250.4),(500 - 250.4), (400 - 300)
         ISPU = (r*k/t) + 300
-      elif 150.4 < q2 < 250.4 and q2 == 250.4: 
+      elif 150.4 < q2 < 250.4 or q2 == 250.4: 
         k, t , r = (q2 - 150.4),(250.4 - 150.4), (300 - 200)
         ISPU = (r*k/t) + 200
-      elif 55.4 < q2 < 150.4 and q2 == 150.4:
+      elif 55.4 < q2 < 150.4 or q2 == 150.4:
         k, t , r = (q2 - 55.4),(150.4 - 55.4), (200 - 100)
         ISPU = (r*k/t) + 100
       else :
@@ -44,10 +44,10 @@ def convert_ISPU(predictions):
       if q3 > 800:
         k, t , r = (q3 - 800),(1000 - 800), (400 - 300)
         ISPU = (r*k/t) + 300
-      elif 400 < q3 < 800 and q3 == 800: 
+      elif 400 < q3 < 800 or q3 == 800: 
         k, t , r = (q3 - 400),(800 - 400), (300 - 200)
         ISPU = (r*k/t) + 200
-      elif 235 < q3 < 400 and q3 == 400:
+      elif 235 < q3 < 400 or q3 == 400:
         k, t , r = (q3 - 235),(400 - 235), (200 - 100)
         ISPU = (r*k/t) + 100
       else :
@@ -57,10 +57,10 @@ def convert_ISPU(predictions):
       if q4 > 800:
         k, t , r = (q4 - 800),(1200 - 800), (400 - 300)
         ISPU = (r*k/t) + 300
-      elif 400 < q4 < 800 and q4 == 800: 
+      elif 400 < q4 < 800 or q4 == 800: 
         k, t , r = (q4 - 400),(800 - 400), (300 - 200)
         ISPU = (r*k/t) + 200
-      elif 180 < q4 < 400 and q4 == 400:
+      elif 180 < q4 < 400 or q4 == 400:
         k, t , r = (q4 - 180),(400 - 180), (200 - 100)
         ISPU = (r*k/t) + 100
       else :
@@ -70,10 +70,10 @@ def convert_ISPU(predictions):
       if q5 > 2260:
         k, t , r = (q5 - 2260),(3000 - 2260), (400 - 300)
         ISPU = (r*k/t) + 300
-      elif 1130 < q5 < 2260 and q5 == 2260: 
+      elif 1130 < q5 < 2260 or q5 == 2260: 
         k, t , r = (q5 - 1130),(2260 - 1130), (300 - 200)
         ISPU = (r*k/t) + 200
-      elif 200 < q5 < 1130 and q5 == 1130:
+      elif 200 < q5 < 1130 or q5 == 1130:
         k, t , r = (q5 - 200),(1130 - 200), (200 - 100)
         ISPU = (r*k/t) + 100
       else:  
@@ -83,10 +83,10 @@ def convert_ISPU(predictions):
       if q6 > 30000:
         k, t , r = (q6 - 30000),(45000 - 30000), (400 - 300)
         ISPU = (r*k/t) + 300
-      elif 15000 < q6 < 30000 and q6 == 30000: 
+      elif 15000 < q6 < 30000 or q6 == 30000: 
         k, t , r = (q6 - 15000),(30000 - 15000), (300 - 200)
         ISPU = (r*k/t) + 200
-      elif 8000 < q6 < 15000 and q6 == 15000:
+      elif 8000 < q6 < 15000 or q6 == 15000:
         k, t , r = (q6 - 8000),(15000 - 8000), (200 - 100)
         ISPU = (r*k/t) + 100
       else :
